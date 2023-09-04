@@ -1,1 +1,1 @@
-This is a markdown file in this repo. I'm adding a different sentence in VS Code.
+This is a markdown file in this repo. This sentence is merge conflict resolution.
