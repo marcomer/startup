@@ -1,1 +1,1 @@
-This is a markdown file in this repo. Cool huh?
+This is a markdown file in this repo. 
