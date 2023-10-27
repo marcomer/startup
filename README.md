@@ -1,6 +1,10 @@
 # Startup Project
 BYU CS 260 Fall 2023 Startup Project for Marcus Omer
 
+## Table of Contents
+1. [Specification](#specification)
+2. [HTML Deliverable](#html-deliverable)
+
 ## Specification
 ### Pitch
 The website will be a command line/terminal themed sudoku site that will let users generate, solve, and revisit sudoku puzzles. The command line/terminal theme is inspired from the "sudo" part of "sudoku", which is a reference to the `sudo` terminal command. The website will have a default dark theme and the sudoku board will be made with ASCII characters/art. 
