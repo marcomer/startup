@@ -25,3 +25,13 @@ Users can generate and revisit sudoku boards by logging in with an account. To m
 ![](Sudoku_Statistics_Page_Mock.png)
 
 
+
+## HTML Deliverable
++ **HTML Pages** - Created HTML pages for the login page (`index.html`), the history page (`history.html`), the statistics page (`statistics.html`), and the solve page (`solve.html`), which is where the user can solve a single sudoku puzzle. The original specification suggests that there could be a settings page, but at the moment there are not enough adjustable settings to justify an entire settings page.
++ **Links** - The login button on the login page links to the history page. The "Continue" and "Generate Puzzle" buttons link to the solve page. Each page except for the login page contains a navigation menu which links to the history page, statistics page, and the login page, which is linked to by the "Logout" option. Additionally, each page contains a link to this GitHub repo in the footer.
++ **Text** - Most of the textual content on the pages are informative labels for data or buttons. "How to Play Sudoku" instructions were added to the login page as well. These instructions could be added to the solve page in the future, if it does not clutter the page.
++ **Service Calls** - Any service calls to 3rd party services like authentication, database, etc. are currently just text and HTML input elements.
++ **Images** - The first iteration of the "superuserdoku" logo, which currently says "*sudoku*" was created using an [ASCII Art website](https://www.asciiart.eu/text-to-ascii-art) and added as an image to the header of every page. There are also placeholder images on the history page for the unsolved/solved sudoku boards.
++ **Login** - The login page contains a form with two input elements. The first is a text input element, is labeled "Email", and has the placeholder 'email@domain.com'. The second is a password input element and is labeled "Password". The "Login" button automatically takes the user to the history page.
++ **Database Data** - The sudoku boards and any user data will be stored in the database. Currently, the sudoku boards are just images and any user data on the statistics page are just text enclosed in span elements. On the solve page, the sudoku puzzle table would normally be auto filled with an incomplete board from the database. The "Dark Mode" checkbox setting might also be stored in the database to improve the users' experience.
++ **WebSocket Data** - Real-time data on the statistics page is currently just text enclosed in span elements.
