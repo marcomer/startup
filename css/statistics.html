@@ -1,0 +1,107 @@
+<!-- 
+statistics.html shows the user's statistics and global statistics.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SuperUserDoku</title>
+    <!-- <link rel="icon" href="favicon.ico" /> -->
+  </head>
+  <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <!-- Will probably change logo later and make a light and dark version of it -->
+      <img src="ascii-text-art.png" />
+    
+      <!-- Navigation elements -->
+      <nav>
+        <menu>
+          <li><a href="history.html">History</a></li>
+          <li>Statistics</li>
+          <li><a href="index.html">Logout</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+  
+    <main>
+      <h2>Puzzles Solved Scoreboard</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Puzzles Solved</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>75</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>49</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>29</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>7</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Global Statistics</h2>
+      <p>Puzzles Generated: <span>123,456</span></p>
+      <p>Puzzles Solved: <span>50,000</span></p>
+      <p>Total Players: <span>6,000</span></p>
+
+      <h2>Your Statistics</h2>
+      <p>Puzzles Generated: <span>50</span></p>
+      <p>Puzzles Solved: <span>45</span></p>
+      <p>Scoreboard position: <span>#3</span></p>
+    </main>
+
+    <footer>
+      <hr />
+      <label for="dark_mode_setting">Dark Mode</label>
+      <input type="checkbox" id="dark_mode_setting" name="dark_mode_setting" checked>
+      <br />
+      <span class="text-reset">Marcus Omer</span>
+      <br />
+      <a href="https://github.com/marcomer/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
