@@ -1,0 +1,6 @@
+/* main.css defines the basic styles for all pages */
+* {
+  /* Lucida Console */
+  font-family: monospace;
+  color: black;
+}
