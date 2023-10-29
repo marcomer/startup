@@ -16,22 +16,33 @@ solve.html contains the puzzle currently being solved. Here the user will solve 
 
   </head>
   <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
+
     <header>
-      <!-- Will probably change logo later and make a light and dark version of it -->
-      <img src="ascii-text-art.png" />
-
-      <!-- Navigation elements -->
-      <nav>
-        <menu>
-          <li><a href="history.html">History</a></li>
-          <li><a href="statistics.html">Statistics</a></li>
-          <li><a href="index.html">Logout</a></li>
-        </menu>
+      <nav class="menu-wrapper">
+        <input class="checkbox-toggle" type="checkbox">
+        <div class="hamburger">
+          <div id="hamburger-1"></div>
+          <div id="hamburger-2"></div>
+          <div id="hamburger-3"></div>
+        </div>
+        <div class="menu">
+          <div class="menu-background">
+            <img src="ascii-text-art.png" />
+            <ul>
+              <li><a href="history.html">History</a></li>
+              <li><a href="statistics.html">Statistics</a></li>
+              <li><a href="index.html">Logout</a></li>
+            </ul>
+            <label for="dark_mode_setting">Dark Mode</label>
+            <input type="checkbox" id="dark_mode_setting" name="dark_mode_setting" checked>
+            <span class="text-reset">Marcus Omer</span>
+            <a href="https://github.com/marcomer/startup">GitHub</a>
+          </div>
+        </div>
       </nav>
-
-      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
-      <hr />
+      
+      <!-- Will probably change logo later and make a light and dark version of it -->
+      <img src="ascii-text-art.png" />      
     </header>
 
     <main>

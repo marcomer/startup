@@ -1,6 +1,164 @@
 /* main.css defines the basic styles for all pages */
+
 * {
   /* Lucida Console */
-  font-family: monospace;
-  color: black;
+  font-family: "Courier New", monospace;
+  color: white;
 }
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #1a1a1a;
+}
+
+
+/* Header rules */
+header {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+header > img {
+  display: flex;
+  width: 500px;
+  align-self: center;
+}
+
+
+/* Nav menu rules */
+.menu-wrapper {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  z-index: 1;
+}
+
+.checkbox-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+
+.hamburger {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  background: #909090;
+  border-radius: 0.12em;
+  cursor: pointer;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger > div {
+  flex: none;
+  width: 20px;
+  height: 2px;
+  background: #fefefe;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  backface-visibility: hidden;
+  outline: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu > .menu-background {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: #1a1a1a;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+  flex: none;
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.2s;
+}
+
+.menu > .menu-background > ul {
+  list-style: none;
+  padding: 0 1em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.menu > .menu-background > ul > li {
+  padding: 0;
+  margin: 20px;
+  font-size: 24px;
+}
+
+.menu > .menu-background > img {
+  padding-bottom: 20px;
+}
+
+
+/* Nav Menu checked animations */
+.checkbox-toggle:checked + .hamburger > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-2 {
+  opacity: 0;
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-1 {
+  transform: rotate(45deg);
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-3 {
+  transform: rotate(-45deg);
+}
+
+.checkbox-toggle:checked ~ .menu {
+  pointer-events: auto;
+}
+
+.checkbox-toggle:checked ~ .menu > .menu-background {
+  opacity: 1;
+}
+
+/* https://codepen.io/brenden/pen/VLjKMQ?editors=1100 */
