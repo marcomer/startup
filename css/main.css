@@ -14,6 +14,14 @@ body {
   background: #1a1a1a;
 }
 
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
 
 /* Header rules */
 header {
