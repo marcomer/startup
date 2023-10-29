@@ -125,17 +125,33 @@ header > img {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
+  margin-top: 10px;
 }
 
 .menu > .menu-background > ul > li {
   padding: 0;
-  margin: 20px;
+  margin: 10px;
   font-size: 24px;
 }
 
 .menu > .menu-background > img {
   padding-bottom: 20px;
+}
+
+
+.menu-footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menu-footer > span,
+.menu-footer > a {
+  color: #bbbbbb;
 }
 
 
