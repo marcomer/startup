@@ -1,0 +1,128 @@
+main {
+  display: flex;
+}
+
+/* Button styles */
+main > form {
+  padding-bottom: 40px;
+}
+
+#generate-btn {
+  color: black;
+  background: rgb(255,176,0);
+  padding: 10px 40px;
+  font-size: 18px;
+}
+
+#generate-btn:hover {
+  font-weight: bold;
+}
+
+.continue-btn {
+  color: black;
+  background: rgb(255,176,0);
+}
+
+.continue-btn:hover {
+  background: rgb(255,176,0);
+  font-weight: bold;
+  color: black;
+}
+
+
+/* Puzzle table styles */
+td {
+  text-align: center;
+  border: solid 1px rgb(40,40,40);
+  cursor: default;
+}
+
+table {
+  width: 300px;
+  height: 300px;
+}
+
+td:nth-child(3),
+td:nth-child(6) {
+  border-right: solid 2px white;
+}
+
+td:nth-child(4),
+td:nth-child(7) {
+  border-left: solid 2px white
+}
+
+tr:nth-child(3) td,
+tr:nth-child(6) td {
+  border-bottom: solid 2px white;
+}
+
+tr:nth-child(4) td,
+tr:nth-child(7) td {
+  border-top: solid 2px white;
+}
+
+
+/* Hover menu styling */
+.unsolved-menu,
+.solved-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(230,230,230);
+  border-radius: 10px;
+
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+
+  pointer-events: none;
+  overflow: hidden;
+  backface-visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.1s;
+}
+
+.unsolved-menu {
+  top: 30%;
+  left: 10%;
+  bottom: 30%;
+  right: 10%;
+}
+
+.solved-menu {
+  top: 30%;
+  left: 10%;
+  bottom: 30%;
+  right: 10%;
+  padding-top: 15px;
+}
+
+.unsolved-menu p,
+.solved-menu p {
+  color: black;
+}
+
+.unsolved-puzzle,
+.solved-puzzle {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.unsolved-puzzle:hover > .unsolved-menu,
+.solved-puzzle:hover > .solved-menu {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Puzzle grid styling */
+.puzzle-grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+  justify-content: center;
+  width: 100%;
+  padding: 0px 40px;
+}
