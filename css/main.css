@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background: #1a1a1a;
-  min-width: 450px;
+  min-width: 500px;
 
   padding-bottom: 5rem;
 }
@@ -42,16 +42,16 @@ header {
 
 header > img {
   display: flex;
-  max-width: 100%;
+  width: 450px;
   height: auto;
   align-self: center;
-  padding: 30px 0px;
+  padding: 30px;
 }
 
 header > div {
   display: flex;
-  justify-content: right;
-  margin-bottom: 50px;
+  justify-content: left;
+  margin-bottom: 70px;
 }
 
 
@@ -221,10 +221,16 @@ footer > a {
 
 @media (orientation: portrait) {
   body {
-    margin: 10px;
-    margin-left: 0;
+    margin: 0;
+    padding: 0 15px;
+    padding-bottom: 5rem;
   }
-  img {
-    width: 70%;
+  
+  header > img {
+    width: 450px;
+  }
+
+  .menu > .menu-background > img {
+    width: 450px;
   }
 }
