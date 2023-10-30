@@ -1,0 +1,45 @@
+/* solve.css styles the solve.html page */
+
+td input {
+  color: white;
+  text-align: center;
+  border: solid 1px rgb(40,40,40);
+  background: #1a1a1a;
+  cursor: default;
+  caret-color: transparent;
+
+  padding: 10px;
+  font-size: 20px;
+}
+
+td input:hover {
+  border: solid 1px rgb(100,100,100);
+}
+
+td input:focus {
+  background-color: rgb(0,255,51);
+  color: black;
+}
+
+/* Draw solid line borders */
+td:nth-child(3),
+td:nth-child(6) {
+  border-right: solid 2px white;
+}
+
+td:nth-child(4),
+td:nth-child(7) {
+  border-left: solid 2px white
+}
+
+tr:nth-child(3) td,
+tr:nth-child(6) td {
+  border-bottom: solid 2px white;
+}
+
+tr:nth-child(4) td,
+tr:nth-child(7) td {
+  border-top: solid 2px white;
+}
+
+
