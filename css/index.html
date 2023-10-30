@@ -32,18 +32,27 @@ index.html is the login page. The only place a user may go from the login page i
     </header>
 
     <main>
-      <p>Login to begin solving</p>
-      <form method="get" action="history.html">
-        <label for="email">Email</label>
-        <input type="text" id="email" placeholder="email@domain.com" />
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="" />
-        <button type="submit">Login</button>
-      </form>
-      <br />
-
-      <h2>How to Play Sudoku</h2>
-      <p>A 9x9 square must be filled in with numbers from 1-9. These numbers can't repeat in each vertical and horizontal line and in the marked out 3x3 squares. Use logic and your reasoning to fill in the numbers!</p>
+      <div class="container-fluid text-center">
+        <p>Login to begin solving</p>
+        <form method="get" action="history.html" id="login-form">
+          <div>
+            <div>
+              <label for="email">Email</label>
+              <input type="text" id="email" placeholder="Email" />
+            </div>
+            <div>
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      
+      <div class="container-fluid">
+        <h2>How to Play Sudoku</h2>
+        <p>A 9x9 square must be filled in with numbers from 1-9. These numbers can't repeat in each vertical and horizontal line and in the marked out 3x3 squares. Use logic and your reasoning to fill in the numbers!</p>
+      </div>
     </main>
 
     <footer>
