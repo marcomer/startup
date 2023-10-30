@@ -55,6 +55,11 @@ footer {
   padding-top: 10px;
 }
 
+footer > span,
+footer > a {
+  color: #bbbbbb;
+}
+
 
 /* Nav menu rules */
 .menu-wrapper {
@@ -77,7 +82,7 @@ footer {
   z-index: 1;
   width: 40px;
   height: 40px;
-  background: #909090;
+  background: rgb(255,176,0);
   border-radius: 0.12em;
   cursor: pointer;
   backface-visibility: hidden;
@@ -91,7 +96,7 @@ footer {
   flex: none;
   width: 20px;
   height: 2px;
-  background: #fefefe;
+  background: #0f0f0f;
   transition: all 0.4s ease;
   display: flex;
   align-items: center;
