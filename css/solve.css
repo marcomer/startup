@@ -8,7 +8,8 @@ td input {
   cursor: default;
   caret-color: transparent;
 
-  padding: 8px 10px;
+  width: 60px;
+  height: 60px;
   font-size: 20px;
 }
 
@@ -42,10 +43,10 @@ tr:nth-child(7) td {
   border-top: solid 2px white;
 }
 
-@media (max-width: 475px) {
+@media (max-width: 575px) {
   td input {
-    padding: 4px 6px;
-    font-size: 20px;
+    width: 35px;
+    height: 35px;
   }
 }
 
