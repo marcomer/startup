@@ -20,3 +20,13 @@ main {
 input {
   color: black;
 }
+
+.btn {
+  color: black;
+  background: #909090;
+}
+
+.btn:hover {
+  color: white;
+  background: #4f9c23;
+}
