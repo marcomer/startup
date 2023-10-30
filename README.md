@@ -1,6 +1,11 @@
 # Startup Project
 BYU CS 260 Fall 2023 Startup Project for Marcus Omer
 
+## Website Links
++ [superuserdoku.click](https://superuserdoku.click)
++ [startup.superuserdoku.click](https://startup.superuserdoku.click)
++ [simon.superuserdoku.click](https://simon.superuserdoku.click)
+
 ## Table of Contents
 1. [Specification](#specification)
 2. [HTML Deliverable](#html-deliverable)
