@@ -8,12 +8,12 @@
 
 body {
   position: relative;
-  margin: 0px 5%;
+  margin: 0px 10%;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background: #1a1a1a;
-  min-width: 500px;
+  min-width: 375px;
 
   padding-bottom: 5rem;
 }
@@ -228,5 +228,25 @@ footer > a {
     margin: 0;
     padding: 0 15px;
     padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 475px) {
+  header > img {
+    width: 425px;
+  }
+
+  .menu > .menu-background > img {
+    width: 425px;
+  }
+}
+
+@media (max-width: 475px) {
+  header > img {
+    width: 325px;
+  }
+
+  .menu > .menu-background > img {
+    width: 325px;
   }
 }
