@@ -26,14 +26,15 @@ index.html is the login page. The only place a user may go from the login page i
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
       <!-- Will probably change logo later and make a light and dark version of it -->
-      <img src="ascii-text-art.png" />
+      <img src="ascii-text-art.png" alt="SuperUserDoku Logo"/>
+      
 
       <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
     </header>
 
-    <main>
-      <div class="container-fluid text-center mb-3 mt-3">
-        <p>Login to begin solving</p>
+    <main class="container-fluid text-center">
+      <div class="mb-3 mt-3">
+        <h2>Login To Begin Solving</h2>
         <form method="get" action="history.html" id="login-form">
           <div>
             <div>
@@ -49,14 +50,14 @@ index.html is the login page. The only place a user may go from the login page i
         </form>
       </div>
       
-      <div class="container-xl text-center mt-5">
-        <h2>How to Play Sudoku</h2>
+      <div class="mt-5">
+        <h2>How To Play Sudoku</h2>
         <p>A 9x9 square must be filled in with numbers from 1-9. These numbers can't repeat in each vertical and horizontal line and in the marked out 3x3 squares. Use logic and your reasoning to fill in the numbers!</p>
       </div>
     </main>
 
     <footer>
-      <span class="text-reset">Marcus Omer</span>
+      <span>Marcus Omer</span>
       <br />
       <a href="https://github.com/marcomer/startup">GitHub</a>
     </footer>
