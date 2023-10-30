@@ -4,6 +4,7 @@ BYU CS 260 Fall 2023 Startup Project for Marcus Omer
 ## Table of Contents
 1. [Specification](#specification)
 2. [HTML Deliverable](#html-deliverable)
+3. [CSS Deliverable](#css-deliverable)
 
 ## Specification
 ### Pitch
@@ -39,3 +40,12 @@ Users can generate and revisit sudoku boards by logging in with an account. To m
 + **Login** - The login page contains a form with two input elements. The first is a text input element, is labeled "Email", and has the placeholder 'email@domain.com'. The second is a password input element and is labeled "Password". The "Login" button automatically takes the user to the history page.
 + **Database Data** - The sudoku boards and any user data will be stored in the database. Currently, the sudoku boards are just images and any user data on the statistics page are just text enclosed in span elements. On the solve page, the sudoku puzzle table would normally be auto filled with an incomplete board from the database. The "Dark Mode" checkbox setting might also be stored in the database to improve the users' experience.
 + **WebSocket Data** - Real-time data on the statistics page is currently just text enclosed in span elements.
+
+
+## CSS Deliverable
++ **Header, footer, and main content body** - Each page contains the same formatted header and footer. The header contains the website logo image and the navigation menu icon on the left side of the screen. The footer contains my name and the link to this GitHub. The main content body heavily differs between the pages, but each page does properly balance the header, footer, and main content body.
++ **Navigation elements** - The navigation element is a hamburger menu with a fixed position at the top-left side of every page. When the nav element is clicked on, a fullscreen menu appears on top of the page. The hamburger icon changes to a close symbol using a rotate animation. The fullscreen menu contains the website logo, the navigation links, a dark mode settings Bootstrap toggle, and the footer content. To close the fullscreen menu, the user clicks on the close icon and the fullscreen menu will fade back to original page and the close icon will rotate back to a hamburger menu icon. This menu was based on a [CodePen demo](https://codepen.io/brenden/pen/VLjKMQ).
++ **Responsive to window resizing** - Every page is reponsive to window resizing. CSS media rules were used to adjust the widths, heights, and ordering of most elements to provide visually appealing fitting and scaling on fullscreen and on mobile.
++ **Application elements** - Every page contains several adjustable and formatted elements. Most elements are formatted vertically using flexboxs and divs. A grid display is also used on the History page to display the puzzles. Additionally, several elements such as tables and buttons have special styling when hovered over with a cursor. Most of the buttons also have special orange/amber coloring to make them pop out to the user.
++ **Application text content** - Text content has consistent styling across the whole website. The fonts and text colors were chosen to mimic a classic computer terminal. For example, the font family used was "Courier New", monospace, and `h2` elements were styled to be a computer terminal green. The Statistics page showcases most of the text styling.
++ **Application images** - The original header logo from the HTML Deliverable is still present and does not yet fit the visual style of the background and text. However, it's width is carefully styled to fit the page and be responsive. In the future I plan to create a new image that fits the visual style. The logo image was also added to the fullscreen menu and is also responsive. Another note, the images on the history page were removed and replaced with actual tables.
