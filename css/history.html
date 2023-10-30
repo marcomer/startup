@@ -25,37 +25,42 @@ and view puzzles past solved and unsolved puzzles.
   </head>
   <body>
     <header>
-      <nav class="menu-wrapper">
-        <input class="checkbox-toggle" type="checkbox">
-        <div class="hamburger">
-          <div id="hamburger-1"></div>
-          <div id="hamburger-2"></div>
-          <div id="hamburger-3"></div>
-        </div>
-        <div class="menu">
-          <div class="menu-background">
-            <img src="ascii-text-art.png" />
-            <ul>
-              <li>History</li>
-              <li><a href="statistics.html">Statistics</a></li>
-              <li><a href="index.html">Logout</a></li>
-            </ul>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-setting" checked>
-              <label class="form-check-label" for="flexSwitchCheckChecked">Dark Mode</label>
-            </div>
-
-            <div class="menu-footer">
-              <span>Marcus Omer</span>
-              <a href="https://github.com/marcomer/startup">GitHub</a>
-            </div>
-
-          </div>
-        </div>
-      </nav>
-      
       <!-- Will probably change logo later and make a light and dark version of it -->
       <img src="ascii-text-art.png" />
+
+      <div>
+        <nav class="menu-wrapper">
+          <input class="checkbox-toggle" type="checkbox">
+          <div class="hamburger">
+            <div id="hamburger-1"></div>
+            <div id="hamburger-2"></div>
+            <div id="hamburger-3"></div>
+          </div>
+          <div class="menu">
+            <div class="menu-background">
+              <img src="ascii-text-art.png" />
+              <ul>
+                <li>History</li>
+                <li><a href="statistics.html">Statistics</a></li>
+                <li><a href="index.html">Logout</a></li>
+              </ul>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="dark-mode-setting" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Dark Mode</label>
+              </div>
+
+              <div class="menu-footer">
+                <span>Marcus Omer</span>
+                <a href="https://github.com/marcomer/startup">GitHub</a>
+              </div>
+
+            </div>
+          </div>
+        </nav>
+      </div>
+      
+      
+      
     </header>
 
     <main>
@@ -66,27 +71,31 @@ and view puzzles past solved and unsolved puzzles.
 
       <!-- List of puzzles in a grid ordered by most recently opened, will later determine if they should be tables or possibly even generated images -->
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
-      <!-- In the future, the date generated and continue button will only appear if you hover over the puzzle -->
-      <p>Generated 10/26/2023</p>
-      <form method="get" action="solve.html">
-        <button type="submit">Continue</button>
-      </form>
-      <br />
+      <div class="puzzle-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
+        <!-- In the future, the date generated and continue button will only appear if you hover over the puzzle -->
+        <p>Generated 10/26/2023</p>
+        <form method="get" action="solve.html">
+          <button type="submit">Continue</button>
+        </form>
+        <br />
+  
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
+        <br />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
+        <!-- In the future, the date generated and date solved will only appear if you hover over the puzzle -->
+        <p>Generated 10/1/2023</p>
+        <p>Solved 10/3/2023</p>
+        <br />
+  
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
+      </div>
 
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_standardized_layout.svg.png" />
-      <br />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
-      <!-- In the future, the date generated and date solved will only appear if you hover over the puzzle -->
-      <p>Generated 10/1/2023</p>
-      <p>Solved 10/3/2023</p>
-      <br />
-
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg/250px-Sudoku_Puzzle_by_L2G-20050714_solution_standardized_layout.svg.png" />
+      
 
     </main>
 
