@@ -1,10 +1,48 @@
 # Notes
 
+## Table Of Contents
+1. [DNS](#dns)
+2. [HTML](#html)
+3. [CSS](#css)
+4. [JavaScript](#javascript)
+    + [Console](#console)
+    + [Linking to HTML](#linking-to-html)
+    + [Types](#types)
+    + [Loops](#loops)
+    + [Strings](#strings)
+    + [Anonymous functions](#anonymous-functions)
+    + [Creating, passing, and returning functions](#creating-passing-and-returning-functions)
+    + [Inner functions](#inner-functions)
+    + [Arrow Function](#arrow-function)
+    + [This pointer](#this-pointer)
+    + [Array Object Functions](#array-object-functions)
+    + [JSON](#json)
+    + [Regular Expressions](#regular-expressions)
+    + [Rest/Variadic Functions](#restvariadic-functions)
+    + [Exceptions](#exceptions)
+    + [Destructuring](#destructuring)
+    + [Object Functions](#object-functions)
+    + [Scope](#scope)
+    + [Modules](#modules)
+    + [Document Object Model (DOM)](#document-object-model-dom)
+    + [Event Listeners](#event-listeners)
+    + [LocalStorage](#localstorage)
+    + [Promises](#promises)
+    + [Await](#await)
+    + [Async](#async)
+
+
 ## Sept 3
 Learned basics of resolving merge conflicts. Should look up how merge conflicts can be resolved in the command line.
 
 # DNS
+Once a domain name is in the registry it can be listed with a domain name system (DNS) server and associated with an IP address. Of course you must also lease the IP address before you can use it to uniquely identify a device on the internet, but that is a topic for another time. Every DNS server in the world references a few special DNS servers that are considered the `authoritative name servers` for associating a domain name with an IP address.
 
+The DNS database records that facilitate the mapping of domain names to IP addresses come in several flavors. The main ones we are concerned with are the `address` (`A`) and the `canonical name` (`CNAME`) records. An `A` record is a straight mapping from a domain name to IP address. A `CNAME` record maps one domain name to another domain name. This acts as a domain name alias. You would use a CNAME to do things like map `byu.com` to the same IP address as `byu.edu` so that either one could be used.
+
+When you enter a domain name into a browser, the browser first checks to see if it has the name already in its cache of names. If it does not, it contacts a DNS server and gets the IP address. The DNS server also keeps a cache of names. If the domain name is not in the cache, it will request the name from an `authoritative name server`. If the authority does not know the name then you get an unknown domain name error. If the process does resolve, then the browser makes the HTTP connection to the associated IP address.
+
+As you can see, there is a lot of levels of name caching. This is done for performance reasons, but it also can be frustrating when you are trying to update the information associated with your domain name. This is where the `time to live` (`TTL`) setting for a domain record comes into play. You can set this to be something short like 5 minutes or as long as several days. The different caching layers should then honor the TTL and clear their cache after the requested period has passed.
 
 # HTML
 
@@ -1300,7 +1338,7 @@ There are four main functions that can be used with localStorage.
 
 A local storage value must be of type `string`, `number`, or `boolean`. If you want to store a JavaScript object or array, then you must first convert it to a JSON string with `JSON.stringify()` on insertion, and parse it back to JavaScript with `JSON.parse()` when retrieved.
 
-## Example
+## LocalStorage Example
 
 Open your startup website and run the following code in the browser's dev tools console window.
 
