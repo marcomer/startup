@@ -1,0 +1,95 @@
+/* statistics.css contains the styling for the statistics page */
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.scoreboard-section {
+  padding-right: 20px;
+}
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+.stats-section > div {
+  padding-bottom: 20px;
+}
+
+h2 {
+  /*color: #ffb256;*/
+  color: rgb(0,255,51);
+}
+
+.stats-section div span {
+  color: rgb(255,204,0);
+}
+
+table {
+  width: 100%;
+}
+
+th, td {
+  padding: 10px;
+  border: solid 1px rgb(20,20,20);
+}
+
+th {
+  background-color: rgb(40,40,40);
+}
+
+td {
+  background-color: #d0d0d0;
+  color: black;
+}
+
+tr td:nth-child(1),
+tr th:nth-child(1) {
+  text-align: center;
+}
+
+
+
+@media (orientation: portrait) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .scoreboard-section {
+    padding-right: 0;
+    padding-bottom: 60px;
+  }
+
+  .stats-section {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+  }
+
+  .stats-section > div {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+/*
+Amber       rgb(255,176,0)
+Lt. Amber   rgb(255,204,0)
+
+Green 1     rgb(51,255,0)
+Apple ][    rgb(51,255,51)
+Green 2     rgb(0,255,51)
+
+Apple llc   rgb(102,255,102)
+Green 3     rgb(0,255,102)
+
+
+Background: rgb(40,40,40)
+*/
