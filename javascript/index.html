@@ -18,6 +18,7 @@ index.html is the login page. The only place a user may go from the login page i
     crossorigin="anonymous"
     />
 
+    <script src="login.js"></script>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="index.css">
 
@@ -35,7 +36,7 @@ index.html is the login page. The only place a user may go from the login page i
     <main class="container-fluid text-center">
       <div class="mb-3 mt-5">
         <h2>Login To Begin Solving</h2>
-        <form method="get" action="history.html" id="login-form">
+        <div id="login-form">
           <div>
             <div>
               <label for="email">Email</label>
@@ -46,8 +47,8 @@ index.html is the login page. The only place a user may go from the login page i
               <input type="password" id="password" placeholder="Password" />
             </div>
           </div>
-          <button type="submit" class="btn">Login</button>
-        </form>
+          <button class="btn" onclick="login()">Login</button>
+        </div>
       </div>
       
       <div class="mt-5">
