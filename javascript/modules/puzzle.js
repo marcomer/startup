@@ -375,6 +375,7 @@ function removeBoxes(n, table, actual) {
   shuffleArray(coords);
   let solver = new PuzzleSolver(table);
 
+  let startTime = Date.now();
   while (count > 0 && coords.length > 0) {
     const [r,c] = coords.pop();
     const backup = table[r][c];
@@ -383,12 +384,15 @@ function removeBoxes(n, table, actual) {
       count--;
     } else {
       table[r][c] = backup;
+      coords.push([r,c]);
+      shuffleArray(coords);
     }
   }
 }
 
 /**
  * Helper function for generatePuzzle(). Creates a puzzle with a unique solution.
+ * Max number of boxes that can be removed is 57 (inclusive).
  */
 function generatePuzzleHelper() {
   try {
@@ -415,7 +419,7 @@ function generatePuzzleHelper() {
     // create the partial version of the solution
     let partial = JSON.parse(JSON.stringify(solution));
     console.log("Removing boxes...");
-    removeBoxes(50, partial, solution);
+    removeBoxes(57, partial, solution);
     console.log("Partial board:");
     console.log(partial);
     console.log("Verifying that there is one, unique solution...");
@@ -426,7 +430,7 @@ function generatePuzzleHelper() {
     }
 
     console.log(`Removed ${getEmptyBoxes(partial).length} boxes`);
-    if (getEmptyBoxes(partial).length !== 50) {
+    if (getEmptyBoxes(partial).length !== 57) {
       throw Error ("Did not remove enough boxes");
     }
 
