@@ -80,6 +80,17 @@ class Game {
         // puzzle has been solved
         this.resetDisplay();
 
+        // TODO: increase solved counter
+        if (Database.getUserSolved() === null) {
+          Database.setUserSolved(0);
+        }
+        Database.setUserSolved(Database.getUserSolved() + 1);
+
+        if (Database.getGlobalSolved() === null) {
+          Database.setGlobalSolved(1000);
+        }
+        Database.setGlobalSolved(Database.getGlobalSolved() + 1);
+
         // disable all inputs
         let tdElements = document.getElementsByTagName("td");
         for (let td of tdElements) {
@@ -91,16 +102,7 @@ class Game {
 
         this.displaySolvedAnimation();
 
-        // TODO: increase solved counter
-        if (Database.getUserSolved() === null) {
-          Database.setUserSolved(0);
-        }
-        Database.setUserSolved(Database.getUserSolved() + 1);
 
-        if (Database.getGlobalSolved() === null) {
-          Database.setGlobalSolved(1000);
-        }
-        Database.setGlobalSolved(Database.getGlobalSolved() + 1);
 
 
         // TODO: create pop up, show when generated and when solved, continue to history page button

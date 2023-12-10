@@ -1,3 +1,5 @@
+import {Database} from "./db.js";
+
 // module containing the Puzzle class and ways to generate and get puzzles
 
 // global timer
@@ -483,6 +485,14 @@ function generatePuzzleHelper(rm) {
  * Generate a new puzzle with a unique solution.
  */
 export async function generatePuzzle(rm = 55) {
+  if (Database.getGlobalGenerated() === null) {
+    Database.setGlobalGenerated(1000);
+  }
+  Database.setGlobalGenerated(Database.getGlobalGenerated() + 1);
+  if (Database.getUserGenerated() === null) {
+    Database.setUserGenerated(50);
+  }
+  Database.setUserGenerated(Database.getUserGenerated() + 1);
   return generatePuzzleHelper(rm);
 }
 
