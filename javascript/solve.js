@@ -1,4 +1,5 @@
-import {Puzzle, generatePuzzle, getPuzzle} from "./modules/puzzle.js"
+import {Puzzle, generatePuzzle, getPuzzle} from "./modules/puzzle.js";
+import {Database} from "./modules/db.js";
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -91,10 +92,18 @@ class Game {
         this.displaySolvedAnimation();
 
         // TODO: increase solved counter
+        if (Database.getUserSolved() === null) {
+          Database.setUserSolved(0);
+        }
+        Database.setUserSolved(Database.getUserSolved() + 1);
 
-        // create pop up, show when generated and when solved, continue to history page button
+        if (Database.getGlobalSolved() === null) {
+          Database.setGlobalSolved(1000);
+        }
+        Database.setGlobalSolved(Database.getGlobalSolved() + 1);
 
-        
+
+        // TODO: create pop up, show when generated and when solved, continue to history page button
       }
       return true;
     }

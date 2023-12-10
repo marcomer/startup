@@ -116,16 +116,16 @@ statistics.html shows the user's statistics and global statistics.
       <div class="stats-section">
         <div>
           <h2>Global Statistics</h2>
-          <p>Puzzles Generated: <span>123,456</span></p>
-          <p>Puzzles Solved: <span>50,000</span></p>
-          <p>Total Players: <span>6,000</span></p>
+          <p>Puzzles Generated: <span id="globalGenerated">123,456</span></p>
+          <p>Puzzles Solved: <span id="globalSolved">50,000</span></p>
+          <p>Total Players: <span id="totalPlayers">6,000</span></p>
         </div>
 
         <div>
           <h2>Your Statistics</h2>
-          <p>Puzzles Generated: <span>50</span></p>
-          <p>Puzzles Solved: <span>45</span></p>
-          <p>Scoreboard position: <span>#3</span></p>
+          <p>Puzzles Generated: <span id="userGenerated">50</span></p>
+          <p>Puzzles Solved: <span id="userSolved">45</span></p>
+          <p>Scoreboard position: <span id="userScoreboard">#3</span></p>
         </div>
       </div>
     </main>
@@ -141,5 +141,8 @@ statistics.html shows the user's statistics and global statistics.
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"
     ></script>
+
+    <script type="module" src="modules/db.js"></script>
+    <script type="module" src="statistics.js"></script>
   </body>
 </html>
