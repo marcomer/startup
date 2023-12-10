@@ -14,18 +14,37 @@ class Game {
 
   displayViolations(row, col, violations) {
     // reset any background colors
+    let tdElements = document.getElementsByTagName("td");
+    for (let td of tdElements) {
+      let input = td.firstElementChild;
+      if (input !== null) {
+        input.style.background = "#1a1a1a";
+      }
+    }
 
-    // insert all numbers
+    for (let i = 0; i < violations.length; i++) {
+      const [row, col] = violations[i];
+      let input = document.getElementById(`[${row}][${col}]`);
+      if (input != null) {
+        input.style.background = "red";
+      }
+    }
   }
 
   resetDisplay() {
-    // reset any background colors
-    
-    // insert all numbers
+    let tdElements = document.getElementsByTagName("td");
+    for (let td of tdElements) {
+      let input = td.firstElementChild;
+      if (input !== null) {
+        input.style.background = "#1a1a1a";
+        const [row, col] = parseRowAndCol(input.id);
+        input.value = this.getValueAsString(row, col);  // set input's value to puzzle's value
+      }
+    }
   }
 
   displaySolvedAnimation() {
-
+    
   }
 
   /**
@@ -94,6 +113,7 @@ function parseRowAndCol(id) {
 // get the puzzle
 let puzzle = await getPuzzle();
 let game = new Game(puzzle);
+game.resetDisplay();
 
 // INITIALIZE PAGE
 
@@ -108,6 +128,7 @@ for (let td of tdElements) {
       // input box can be edited
       // create focus event listener that changes the caret position to the end of the text box
       input.addEventListener("click", function(event) {
+        game.resetDisplay();
         let target = event.target;
         let len = target.value.length;
              
