@@ -99,6 +99,23 @@ for (let td of tdElements) {
 
     if (game.editable(row, col)) {
       // input box can be edited
+      // create focus event listener that changes the caret position to the end of the text box
+      input.addEventListener("click", function(event) {
+        let target = event.target;
+        let len = target.value.length;
+             
+        if (target.setSelectionRange) {
+            target.focus();
+            target.setSelectionRange(len, len);
+        } else if (target.createTextRange) {
+            let t = target.createTextRange();
+            t.collapse(true);
+            t.moveEnd('character', len);
+            t.moveStart('character', len);
+            t.select();
+        }
+      });
+
 
       // create input event listener that checks and inserts value into puzzle
       input.addEventListener("input", function(event) {

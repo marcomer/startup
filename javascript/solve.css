@@ -17,10 +17,11 @@ td input:hover {
   border: solid 1px rgb(100,100,100);
 }
 
+/*
 td input:focus {
   background-color: rgb(0,255,51);
   color: black;
-}
+}*/
 
 /* Draw solid line borders */
 td:nth-child(3),
