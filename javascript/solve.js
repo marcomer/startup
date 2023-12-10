@@ -55,6 +55,7 @@ class Game {
         input.style.background = "rgb(0,255,51)";
         input.style.color = "#1a1a1a";
         input.style.fontWeight = "bold";
+        input.classList.remove("editableInput");
       }
       await sleep(75);
     }
@@ -91,6 +92,7 @@ class Game {
 
         // TODO: increase solved counter
 
+        // create pop up, show when generated and when solved, continue to history page button
 
         
       }
