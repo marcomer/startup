@@ -3,8 +3,20 @@ import {Database} from "./modules/db.js";
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 
-function resetScoreboard() {
+function updateScoreboard() {
+  // generate a scoreboard
+  let tbody = document.getElementsByTagName("tbody")[0];
+  let scores = [];
+  for (let i = 0; i < 10; i++) {
+    scores.push(Math.floor(Math.random() * 100));
+  }
+  scores.sort((a,b) => b - a);
 
+  for (let i = 0; i < 10; i++) {
+    let tr = tbody.children.item(i);
+    let td = tr.children.item(1);
+    td.innerHTML = `${scores[i]}`;
+  }
 }
 
 function updateGlobalGenerated(n) {
@@ -61,6 +73,7 @@ function setUserScoreboard(n) {
   span.innerHTML = `${Database.getUserScoreboard()}`;
 }
 
+updateScoreboard();
 updateUserGenerated(0);
 updateUserSolved(0);
 setUserScoreboard(3);
