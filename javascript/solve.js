@@ -1,5 +1,7 @@
 import {Puzzle, generatePuzzle, getPuzzle} from "./modules/puzzle.js"
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
+
 class Game {
   #puzzle;
 
@@ -22,16 +24,18 @@ class Game {
       }
     }
 
+    // change background to red for violations
     for (let i = 0; i < violations.length; i++) {
-      const [row, col] = violations[i];
-      let input = document.getElementById(`[${row}][${col}]`);
+      const [r, c] = violations[i];
+      let input = document.getElementById(`[${r}][${c}]`);
       if (input != null) {
-        input.style.background = "red";
+        input.style.background = "#ff2a00";
       }
     }
   }
 
   resetDisplay() {
+    // reset the values and background
     let tdElements = document.getElementsByTagName("td");
     for (let td of tdElements) {
       let input = td.firstElementChild;
@@ -43,8 +47,17 @@ class Game {
     }
   }
 
-  displaySolvedAnimation() {
-    
+  async displaySolvedAnimation() {
+    // fill the display with green background row by row
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        let input = document.getElementById(`[${r}][${c}]`);
+        input.style.background = "rgb(0,255,51)";
+        input.style.color = "#1a1a1a";
+        input.style.fontWeight = "bold";
+      }
+      await sleep(75);
+    }
   }
 
   /**
@@ -63,9 +76,22 @@ class Game {
 
       if (this.#puzzle.solved()) {
         // puzzle has been solved
+        this.resetDisplay();
+
+        // disable all inputs
+        let tdElements = document.getElementsByTagName("td");
+        for (let td of tdElements) {
+          let input = td.firstElementChild;
+          if (input !== null) {
+            input.setAttribute("disabled", "disabled");
+          }
+        }
+
         this.displaySolvedAnimation();
 
-        // increase solved counter
+        // TODO: increase solved counter
+
+
         
       }
       return true;
@@ -111,7 +137,7 @@ function parseRowAndCol(id) {
 
 // create the game
 // get the puzzle
-let puzzle = await getPuzzle();
+let puzzle = await generatePuzzle(50);
 let game = new Game(puzzle);
 game.resetDisplay();
 
@@ -126,6 +152,9 @@ for (let td of tdElements) {
 
     if (game.editable(row, col)) {
       // input box can be edited
+
+      input.style.color = "#b8b8b8";
+
       // create focus event listener that changes the caret position to the end of the text box
       input.addEventListener("click", function(event) {
         game.resetDisplay();
@@ -171,10 +200,12 @@ for (let td of tdElements) {
           event.target.value = backup; // reset to original value
         }
       });
+      input.classList.add("editableInput");
     }
     else {
       // input box cannot be edited
       input.setAttribute("disabled", "disabled"); // disable editing on box
+      input.style.fontWeight = "bold";
     }
   }
 }
