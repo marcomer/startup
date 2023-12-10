@@ -70,7 +70,7 @@ export class Puzzle {
    * array of table positions that the value violates
    */
   insertValueAt(row, col, value) {
-    if (value > 9 || value < 1 || row < 0 || col < 0 || row > 8 || col > 8 ) {
+    if (value > 9 || value < 1 || row < 0 || col < 0 || row > 8 || col > 8) {
       return [false, []];
     }
     const [passed, violations] = this.checkConstraints(row, col, value);
@@ -80,6 +80,25 @@ export class Puzzle {
     }
     return [false, violations];
   }
+
+  /**
+   * Remove a value from the puzzle, if the value is editable.
+   * @param {number} row the table row
+   * @param {number} col the table column
+   * @returns true if the value was removed, false if it was not removed
+   */
+  removeValueAt(row, col) {
+    if (row < 0 || col < 0 || row > 8 || col > 8) {
+      return false;
+    }
+    if (!this.#table[row][col].editable) {
+      return false;
+    }
+
+    this.#table[row][col].value = 0;
+    return true;
+  }
+
 
   /**
    * Checks a given `value` in the table at [`row`][`col`] against the puzzle constraints. 

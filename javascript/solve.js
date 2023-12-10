@@ -49,12 +49,19 @@ class Game {
         // increase solved counter
         
       }
+      return true;
     }
     else {
       if (violations.length > 0) {
         this.displayViolations(row, col, violations);
       }
+      return false;
     }
+  }
+
+
+  removeValueAt(row, col) {
+    this.#puzzle.removeValueAt(row, col);
   }
 
 
@@ -119,19 +126,28 @@ for (let td of tdElements) {
 
       // create input event listener that checks and inserts value into puzzle
       input.addEventListener("input", function(event) {
+        const [row, col] = parseRowAndCol(event.target.id);
         if (event.target.value.length === 0) {
+          // backspace was hit, remove value from puzzle
+          game.removeValueAt(row, col);
           return;
         }
-        const [row, col] = parseRowAndCol(event.target.id);
+        
         const puzzleVal = game.getValueAsString(row, col);
         const value = event.target.value[event.target.value.length - 1];
+        let backup = "";
+        if (event.target.value.length > 1) {
+          backup = event.target.value[0];
+        }
         game.resetDisplay();
-  
-        event.target.value = "";  //reset input value
+
+        event.target.value = "";
         if (isNum.test(value)) {
           // is a single number from 1-9, insert the value
           event.target.value = value; 
           game.insertValue(row, col, parseInt(value));
+        } else {
+          event.target.value = backup; // reset to original value
         }
       });
     }
