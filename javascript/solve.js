@@ -78,14 +78,15 @@ class Game {
 const isNum = new RegExp("[1-9]{1}");
 
 function parseRowAndCol(id) {
-  const match = id.match(isNum);
+  const match = id.match(/\d/g);
   return [parseInt(match[0]), parseInt(match[1])];
 }
 
 
 // create the game
 // get the puzzle
-let game = new Game(getPuzzle());
+let puzzle = await getPuzzle();
+let game = new Game(puzzle);
 
 // INITIALIZE PAGE
 

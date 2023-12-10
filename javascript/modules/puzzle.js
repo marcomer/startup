@@ -394,7 +394,10 @@ function removeBoxes(n, table, actual) {
  * Helper function for generatePuzzle(). Creates a puzzle with a unique solution.
  * Max number of boxes that can be removed is 57 (inclusive).
  */
-function generatePuzzleHelper() {
+function generatePuzzleHelper(rm) {
+  if (rm > 57) {
+    rm = 57;
+  }
   try {
     // generate the complete puzzle
     let solution = [[0,0,0,0,0,0,0,0,0],
@@ -419,7 +422,7 @@ function generatePuzzleHelper() {
     // create the partial version of the solution
     let partial = JSON.parse(JSON.stringify(solution));
     console.log("Removing boxes...");
-    removeBoxes(57, partial, solution);
+    removeBoxes(rm, partial, solution);
     console.log("Partial board:");
     console.log(partial);
     console.log("Verifying that there is one, unique solution...");
@@ -430,7 +433,7 @@ function generatePuzzleHelper() {
     }
 
     console.log(`Removed ${getEmptyBoxes(partial).length} boxes`);
-    if (getEmptyBoxes(partial).length !== 57) {
+    if (getEmptyBoxes(partial).length !== rm) {
       throw Error ("Did not remove enough boxes");
     }
 
@@ -460,8 +463,8 @@ function generatePuzzleHelper() {
 /**
  * Generate a new puzzle with a unique solution.
  */
-export async function generatePuzzle() {
-  return generatePuzzleHelper();
+export async function generatePuzzle(rm = 55) {
+  return generatePuzzleHelper(rm);
 }
 
 
