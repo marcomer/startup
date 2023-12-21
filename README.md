@@ -10,6 +10,7 @@ BYU CS 260 Fall 2023 Startup Project for Marcus Omer
 1. [Specification](#specification)
 2. [HTML Deliverable](#html-deliverable)
 3. [CSS Deliverable](#css-deliverable)
+4. [Javascript Deliverable](#javascript-deliverable)
 
 ## Specification
 ### Pitch
@@ -54,3 +55,10 @@ Users can generate and revisit sudoku boards by logging in with an account. To m
 + **Application elements** - Every page contains several adjustable and formatted elements. Most elements are formatted vertically using flexboxs and divs. A grid display is also used on the History page to display the puzzles. Additionally, several elements such as tables and buttons have special styling when hovered over with a cursor. Most of the buttons also have special orange/amber coloring to make them pop out to the user.
 + **Application text content** - Text content has consistent styling across the whole website. The fonts and text colors were chosen to mimic a classic computer terminal. For example, the font family used was "Courier New", monospace, and `h2` elements were styled to be a computer terminal green. The Statistics page showcases most of the text styling.
 + **Application images** - The original header logo from the HTML Deliverable is still present and does not yet fit the visual style of the background and text. However, it's width is carefully styled to fit the page and be responsive. In the future I plan to create a new image that fits the visual style. The logo image was also added to the fullscreen menu and is also responsive. Another note, the images on the history page were removed and replaced with actual tables.
+
+
+## Javascript Deliverable
++ **Support for future login** - Upon logging in, the user's email is stored in LocalStorage. In the future, this is will sent along with a password to an authentication service.
++ **Support for future database** - A Database class was created that contains static functions. These functions retrieve user and global data. For now, the user and global data is stored in LocalStorage.
++ **Support for future WebSocket** - The `statistics.js` page repeatedly updates the global data variables to mimic WebSocket behavior.
++ **Support for application's interaction logic** - Most application interaction logic exists in `puzzle.js`, `solve.js`, and `history.js`. `puzzle.js` is responsible for defining, generating, and retrieving puzzles. `solve.js` displays and provides event listeners for the sudoku table that process input and trigger animations. `history.js` generates random puzzles when the page is loaded and lets the user go the solve page. In the future, `history.js` will load puzzles from the user's history instead of generating puzzles.
