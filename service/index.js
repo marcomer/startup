@@ -14,6 +14,11 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+app.use("/history/", express.static("public/history.html"));
+app.use("/statistics/", express.static("public/statistics.html"));
+app.use("/solve/", express.static("public/solve.html"));
+
+// Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
@@ -21,6 +26,7 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
 
 /*
 // GetScores
