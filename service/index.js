@@ -1,4 +1,6 @@
-const express = require('express');
+import { getPuzzle } from "./public/modules/puzzle.js";
+import express from 'express';
+
 const app = express();
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
@@ -14,6 +16,7 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
+// website endpoints
 app.use("/history/", express.static("public/history.html"));
 app.use("/statistics/", express.static("public/statistics.html"));
 app.use("/solve/", express.static("public/solve.html"));
@@ -22,6 +25,49 @@ app.use("/solve/", express.static("public/solve.html"));
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
+
+
+// API routing
+
+// get a puzzle
+apiRouter.get("/puzzle/:uuid", async (req, res) => {
+  try {
+    const puzzle = await getPuzzle(req.params.uuid);
+    res.send(puzzle);
+  } catch (error) {
+    return error; // is this right?
+  }
+});
+
+// post/save a puzzle
+apiRouter.post("/puzzle/:uuid", async (req, res) => {
+  try {
+    // parse puzzle from body
+    const puzzle = JSON.parse(req.body);
+    console.log(puzzle); //TODO: in future, save to database
+  } catch (error) {
+    return error; // is this right?
+  }
+});
+
+// generate a new puzzle
+apiRouter.get("/puzzle", async (req, res) => {
+  try {
+    const puzzle = await getPuzzle();
+    res.send(puzzle);
+  } catch (error) {
+    return error; // is this right?
+  }
+});
+
+
+
+
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
