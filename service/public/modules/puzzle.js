@@ -23,6 +23,8 @@ export class Puzzle {
   #solution;
   #table;
   #uuid;
+  #genDate;
+  #solveDate;
 
   /**
    * Construct a new Puzzle object.
@@ -30,12 +32,14 @@ export class Puzzle {
    * @param {Array<Array<Value>>} table 2D array (9x9) of Value objects
    * @param {string} uuid a unique identifer for the Puzzle
    */
-  constructor(solution, table, uuid) {
+  constructor(solution, table, uuid, genDate, solveDate = null) {
     //this.#solution = JSON.parse(JSON.stringify(solution));
     //this.#table = JSON.parse(JSON.stringify(table));
     this.#solution = solution;
     this.#table = table;
     this.#uuid = uuid;
+    this.#genDate = genDate;
+    this.#solveDate = solveDate;
   }
 
   /**
@@ -44,6 +48,18 @@ export class Puzzle {
    */
   get getUUID() {
     return this.#uuid;
+  }
+
+  get getDateGenerated() {
+    return this.#genDate;
+  }
+
+  get getDateSolved() {
+    return this.#solveDate;
+  }
+
+  set setDateSolved(solveDate) {
+    this.#solveDate = solveDate;
   }
 
   /**
@@ -182,9 +198,6 @@ export class Puzzle {
     }
     return this.#table[row][col].editable;
   }
-
-
-  
 }
 
 function getRandomInt(min, max) {
@@ -473,7 +486,7 @@ function generatePuzzleHelper(rm) {
       }
     }
 
-    return new Puzzle(solution, partial, crypto.randomUUID());
+    return new Puzzle(solution, partial, crypto.randomUUID(), new Date());
   } catch (error) {
     console.log(error.message);
     return generatePuzzleHelper();
