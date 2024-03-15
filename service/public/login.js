@@ -1,10 +1,10 @@
 function login() {
-  const emailEl = document.querySelector("#email");
+  const usernameEl = document.querySelector("#username");
   const passwordEl = document.querySelector("#password");
-  if (emailEl.value == "") {
-    return; // do error checking later
+  if (usernameEl.value == "") {
+    return; // TODO: do error checking later
   }
-  localStorage.setItem("userEmail", email.value);
+  localStorage.setItem("username", usernameEl.value);
   window.location.replace("/history");
 }
 
