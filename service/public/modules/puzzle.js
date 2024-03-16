@@ -2,8 +2,6 @@ import {Database} from "./db.js";
 
 // module containing the Puzzle class and ways to generate and get puzzles
 
-// global timer
-
 class Value {
   value;
   editable;
@@ -46,20 +44,33 @@ export class Puzzle {
    * Get the uuid associated with the puzzle.
    * @returns {string} uuid
    */
-  get getUUID() {
+  getUUID() {
     return this.#uuid;
   }
 
-  get getDateGenerated() {
-    return this.#genDate;
+  getDateGenerated() {
+    return new Date(this.#genDate);
   }
 
-  get getDateSolved() {
-    return this.#solveDate;
+  getDateSolved() {
+    return new Date(this.#solveDate);
   }
 
-  set setDateSolved(solveDate) {
+  setDateSolved(solveDate) {
     this.#solveDate = solveDate;
+  }
+
+  /**
+   * Return a basic object of the puzzle, only containing what is needed for a constructor
+   */
+  basicObject() {
+    return { 
+      solution: this.#solution,
+      table: this.#table, 
+      uuid: this.#uuid, 
+      genDate: this.#genDate, 
+      solveDate: this.#solveDate
+    };
   }
 
   /**
@@ -200,315 +211,62 @@ export class Puzzle {
   }
 }
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function squareContainsValue(row, col, value, table) {
-  for (let r = row; r < row + 3; r++) {
-    for (let c = col; c < col + 3; c++) {
-      if (table[r][c] === value) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-function rowContainsValue(row, value, table) {
-  for (let c = 0; c < 9; c++) {
-    if (table[row][c] === value) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function colContainsValue(col, value, table) {
-  for (let r = 0; r < 9; r++) {
-    if (table[r][col] === value) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function shuffleArray(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
 
 
 
-function isSafe(row, col, value, table) {
-  let rmin = row;
-  let cmin = col;
-  while (rmin % 3 !== 0) {
-    rmin--;
-  }
-  while (cmin % 3 !== 0) {
-    cmin--;
-  }
-  return !squareContainsValue(rmin, cmin, value, table) 
-      && !rowContainsValue(row, value, table) 
-      && !colContainsValue(col, value, table)
-}
-
-function verifyBoard(table) {
-  for (let r = 0; r < 9; r++) {
-    for (let c = 0; c < 9; c++) {
-      const backup = table[r][c];
-      table[r][c] = 0; 
-      if (!isSafe(r, c, backup, table)) {
-        table[r][c] = backup;
-        return false;
-      }
-      table[r][c] = backup;
-    }
-  }
-  return true;
-}
-
-function getNextVal(r, c, table) {
-  c++;
-  if (c > 8) {
-    c = 0;
-    r++;
-  }
-  if (r > 8) {
-    return -1;
-  }
-  return table[r][c];
-}
-
-function fillPuzzle(r, c, table) {
-  if (c > 8) {
-    c = 0;
-    r++;
-  }
-
-  if (r === 8 && c === 8) {
-    if (table[r][c] > 0) {
-      return;
-    }
-    // last item
-    for (let i = 1; i < 10; i++) {
-      if (isSafe(r, c, i, table)) {
-        table[r][c] = i;
-        return; // success, return
-      }
-    }
-    table[r][c] = 0;
-    return; // failed, return
-  } 
-
-  if (table[r][c] !== 0) {
-    fillPuzzle(r, c + 1, table);
-    return;
-  }
-
-  // any item except last
-  let tried = [];
-  while (getNextVal(r, c, table) === 0) {
-    // find a new num that hasn't been tried
-    while (tried.length < 9) {
-      let newTry = getRandomInt(1, 9);
-      if (tried.includes(newTry)) {
-        continue;
-      }
-      tried.push(newTry);
-      if (isSafe(r, c, newTry, table)) {
-        table[r][c] = newTry;
-        break;
-      }
-    }
-    if (table[r][c] === 0 || tried.length === 9) {
-      table[r][c] = 0;
-      return; // went through all tries, reset
-    }
-    fillPuzzle(r, c + 1, table);
-    if (getNextVal(r, c, table) !== 0) {
-      return; // success
-    }
-  }
-  return;
-}
-
-function getEmptyBoxes(table) {
-  let boxes = [];
+function numToValues(table) {
   for (let r = 0; r < 9; r++) {
     for (let c = 0; c < 9; c++) {
       if (table[r][c] === 0) {
-        boxes.push([r,c]);
+        table[r][c] = new Value(table[r][c], true);
+      } else {
+        table[r][c] = new Value(table[r][c], false);
       }
     }
   }
-  return boxes;
 }
 
-class PuzzleSolver {
-  table;
-
-  constructor(table) {
-    this.table = table;
-  }
-
-  hasUniqueSolution() {
-    let solutions = this.solve(false);
-    return solutions.length;
-  }
-
-  solve(findAll = true) {
-    let solutions = [];
-    let copy = JSON.parse(JSON.stringify(this.table));
-    try {
-      this.#rsolve(copy, solutions, findAll);
-    } catch(error) {
-      // found more than two solutions (do not find all)
-      console.log("More than 1 solution found");
-    }
-    return solutions;
-  }
-
-  #rsolve(table, solutions, findAll) {
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (table[r][c] === 0) {
-          // try possible values
-          for (let i = 1; i < 10; i++) {
-            if (isSafe(r, c, i, table)) {
-              table[r][c] = i;
-              this.#rsolve(table, solutions, findAll);
-              if (!findAll && solutions.length > 1) {
-                throw Error ("Solve timeout");
-              }
-              table[r][c] = 0;
-            }
-          }
-          return;
-        }
-      }
-    }
-    if (getEmptyBoxes(table).length === 0) {
-      solutions.push(JSON.parse(JSON.stringify(table)));
-    }
-    return;
-  }
-}
-
-function removeBoxes(n, table, actual) {
-  let count = n;
-  let coords = [];
-  for (let r = 0; r < 9; r++) {
-    for (let c = 0; c < 9; c++) {
-      let arr = [r,c];
-      coords.push(arr);
-    }
-  }
-  shuffleArray(coords);
-  let solver = new PuzzleSolver(table);
-
-  let startTime = Date.now();
-  while (count > 0 && coords.length > 0) {
-    const [r,c] = coords.pop();
-    const backup = table[r][c];
-    table[r][c] = 0;
-    if (solver.hasUniqueSolution() === 1) {
-      count--;
-    } else {
-      table[r][c] = backup;
-      coords.push([r,c]);
-      shuffleArray(coords);
-    }
-  }
-}
-
-/**
- * Helper function for generatePuzzle(). Creates a puzzle with a unique solution.
- * Max number of boxes that can be removed is 57 (inclusive).
- */
-function generatePuzzleHelper(rm) {
-  if (rm > 57) {
-    rm = 57;
-  }
-  try {
-    // generate the complete puzzle
-    let solution = [[0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0]];
-
-    fillPuzzle(0, 0, solution);
-    console.log("Solution:");
-    console.log(solution);
-    console.log("Verifying constraints on solution...");
-    console.log(verifyBoard(solution));
-    if (!verifyBoard(solution)) {
-      throw Error ("Solution did not fit constraints");
-    }
-
-    // create the partial version of the solution
-    let partial = JSON.parse(JSON.stringify(solution));
-    console.log("Removing boxes...");
-    removeBoxes(rm, partial, solution);
-    console.log("Partial board:");
-    console.log(partial);
-    console.log("Verifying that there is one, unique solution...");
-    let solver = new PuzzleSolver(partial);
-    console.log(solver.hasUniqueSolution() === 1);
-    if (solver.hasUniqueSolution() !== 1) {
-      throw Error ("Does not have unique solution");
-    }
-
-    console.log(`Removed ${getEmptyBoxes(partial).length} boxes`);
-    if (getEmptyBoxes(partial).length !== rm) {
-      throw Error ("Did not remove enough boxes");
-    }
-
-    let s = partial.join();
-    s = s.replaceAll(",", "");
-    s = s.replaceAll("0", ".");
-    console.log(s);
-    //turn everything in partial to a value
-    for (let r = 0; r < 9; r++) {
-      for (let c = 0; c < 9; c++) {
-        if (partial[r][c] === 0) {
-          partial[r][c] = new Value(partial[r][c], true);
-        } else {
-          partial[r][c] = new Value(partial[r][c], false);
-        }
-      }
-    }
-
-    return new Puzzle(solution, partial, crypto.randomUUID(), new Date());
-  } catch (error) {
-    console.log(error.message);
-    return generatePuzzleHelper();
-  }
-}
 
 
 /**
  * Generate a new puzzle with a unique solution.
  */
-export async function generatePuzzle(rm = 55) {
-  if (Database.getGlobalGenerated() === null) {
+export async function generatePuzzle() {
+  /*if (Database.getGlobalGenerated() === null) {
     Database.setGlobalGenerated(1000);
   }
   Database.setGlobalGenerated(Database.getGlobalGenerated() + 1);
   if (Database.getUserGenerated() === null) {
     Database.setUserGenerated(50);
   }
-  Database.setUserGenerated(Database.getUserGenerated() + 1);
-  return generatePuzzleHelper(rm);
-}
+  Database.setUserGenerated(Database.getUserGenerated() + 1);*/
+  //const puzzleGen = new PuzzleGenerator();
+  //return puzzleGen.generate(50);
 
+  const response = await fetch("https://sudoku-api.vercel.app/api/dosuku");
+  const data = await response.json();
+  let table = data.newboard.grids[0].value;
+  const solution = data.newboard.grids[0].solution;
+  const genDate = new Date();
+
+  numToValues(table);
+
+  return new Puzzle(solution, table, crypto.randomUUID(), genDate);
+} 
+
+
+export async function generateSolvedPuzzle() {
+  const response = await fetch("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{solution}}}");
+  const data = await response.json();
+  const solution = data.newboard.grids[0].solution;
+  let table = JSON.parse(JSON.stringify(solution));
+  const genDate = new Date();
+  const solveDate = new Date();
+
+  numToValues(table);
+
+  return new Puzzle(solution, table, crypto.randomUUID(), genDate, solveDate);
+}
 
 export async function getPuzzle(uuid = 0) {
   // TODO: in the future this should get a puzzle from the database by uuid
