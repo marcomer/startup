@@ -148,14 +148,44 @@ function parseRowAndCol(id) {
 }
 
 
-// create the game
-// get the puzzle
-let puzzle = await generatePuzzle(50);
-let game = new Game(puzzle);
+
+// start program
+
+// get username
+const user = localStorage.getItem("username");
+if (user === null) {
+  throw Error("LocalStorage is missing \"username\" item");
+}
+
+let puzzle = null;
+
+// get puzzleID
+const url = new URL(window.location.href);
+let puzzleID = url.searchParams.get("id");
+if (puzzleID === null) {
+  console.log("In get new puzzle");
+  const response = await fetch(`/api/puzzle/${user}/new`);
+  const {solution, table, id, genDate, solveDate } = await response.json();
+  console.log("Got new puzzle");
+  puzzle = new Puzzle(solution, table, id, genDate, solveDate);
+  puzzleID = id;
+  url.searchParams.append("id", puzzleID);
+  window.history.replaceState({}, "SuperUserDoku", url.href);
+}
+
+// get puzzle
+if (puzzle === null) {
+  const response = await fetch(`/api/puzzle/${user}/${puzzleID}`);
+  const {solution, table, id, genDate, solveDate } = await response.json();
+  puzzle = new Puzzle(solution, table, id, genDate, solveDate);
+}
+
+
+// init game
+const game = new Game(puzzle);
 game.resetDisplay();
 
 // INITIALIZE PAGE
-
 let tdElements = document.getElementsByTagName("td");
 for (let td of tdElements) {
   let input = td.firstElementChild;
