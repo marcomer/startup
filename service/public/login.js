@@ -5,7 +5,7 @@ function login() {
     return; // TODO: do error checking later
   }
   localStorage.setItem("username", usernameEl.value);
-  window.location.replace("/history");
+  window.location.href = "/history";
 }
 
 window.addEventListener('keydown', (event) => {
