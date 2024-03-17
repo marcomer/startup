@@ -19,7 +19,8 @@ app.use(`/api`, apiRouter);
 // website endpoints
 app.use("/history/", express.static("public/history.html"));
 app.use("/statistics/", express.static("public/statistics.html"));
-app.use("/solve/", express.static("public/solve.html"));
+
+app.use("/solve", express.static("public/solve.html"));
 
 //TODO: with the solve endpoint, take the puzzle uuid and "load" the puzzle from the database
 
@@ -37,7 +38,7 @@ apiRouter.get("/puzzle/:user/new/", async (req, res) => {
   try {
     const puzzle = await generatePuzzle(); //TODO: may need timeout
     // TODO: add puzzle to database
-    res.send(puzzle);
+    res.send(puzzle.basicObject());
   } catch (error) {
     return error; // is this right?
   }
@@ -58,7 +59,7 @@ apiRouter.get("/puzzle/:user/recent/", async (req, res) => {
 
 
 // get a puzzle
-apiRouter.get("/puzzle/:user/:uuid/", async (req, res) => {
+apiRouter.get("/puzzle/:user/:id/", async (req, res) => {
   try {
     const puzzle = await generatePuzzle(); //TODO: get puzzle from databaase
     res.send(puzzle.basicObject());
@@ -68,7 +69,7 @@ apiRouter.get("/puzzle/:user/:uuid/", async (req, res) => {
 });
 
 // post/save a puzzle
-apiRouter.post("/puzzle/:user/:uuid/", async (req, res) => {
+apiRouter.post("/puzzle/:user/:id/", async (req, res) => {
   try {
     // parse puzzle from body
     const puzzle = JSON.parse(req.body);
