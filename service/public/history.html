@@ -22,6 +22,16 @@ and view puzzles past solved and unsolved puzzles.
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="history.css">
 
+    <script type="text/javascript">
+      function goToSolvePage(puzzleID = null) {
+        if (puzzleID === null) {
+          window.location.href = `/solve`;
+        } else {
+          window.location.href = `/solve?id=${puzzleID}`;
+        }
+      }
+    </script>
+
   </head>
   <body>
     <header>
@@ -60,7 +70,7 @@ and view puzzles past solved and unsolved puzzles.
     </header>
 
     <main>
-      <form method="get" id="generate-btn-form" action="/solve">
+      <form method="get" id="generate-btn-form" action="javascript:goToSolvePage()">
         <button type="submit" class="btn" id="generate-btn">Generate Puzzle</button>
       </form>
 
