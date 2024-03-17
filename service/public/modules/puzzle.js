@@ -20,7 +20,7 @@ class Value {
 export class Puzzle {
   #solution;
   #table;
-  #uuid;
+  #id;
   #genDate;
   #solveDate;
 
@@ -28,14 +28,14 @@ export class Puzzle {
    * Construct a new Puzzle object.
    * @param {Array<Array<number>>} solution 2D array (9x9) of numbers (1-9)
    * @param {Array<Array<Value>>} table 2D array (9x9) of Value objects
-   * @param {string} uuid a unique identifer for the Puzzle
+   * @param {string} id a unique identifer for the Puzzle
    */
-  constructor(solution, table, uuid, genDate, solveDate = null) {
+  constructor(solution, table, id, genDate, solveDate = null) {
     //this.#solution = JSON.parse(JSON.stringify(solution));
     //this.#table = JSON.parse(JSON.stringify(table));
     this.#solution = solution;
     this.#table = table;
-    this.#uuid = uuid;
+    this.#id = id;
     this.#genDate = genDate;
     this.#solveDate = solveDate;
   }
@@ -44,8 +44,8 @@ export class Puzzle {
    * Get the uuid associated with the puzzle.
    * @returns {string} uuid
    */
-  getUUID() {
-    return this.#uuid;
+  get id() {
+    return this.#id;
   }
 
   getDateGenerated() {
@@ -67,7 +67,7 @@ export class Puzzle {
     return { 
       solution: this.#solution,
       table: this.#table, 
-      uuid: this.#uuid, 
+      id: this.#id, 
       genDate: this.#genDate, 
       solveDate: this.#solveDate
     };
@@ -227,6 +227,12 @@ function numToValues(table) {
 }
 
 
+function generateID() {
+  const list = crypto.randomUUID().split("-");
+  return list[list.length - 1];
+}
+
+
 
 /**
  * Generate a new puzzle with a unique solution.
@@ -251,7 +257,7 @@ export async function generatePuzzle() {
 
   numToValues(table);
 
-  return new Puzzle(solution, table, crypto.randomUUID(), genDate);
+  return new Puzzle(solution, table, generateID(), genDate);
 } 
 
 
@@ -265,7 +271,7 @@ export async function generateSolvedPuzzle() {
 
   numToValues(table);
 
-  return new Puzzle(solution, table, crypto.randomUUID(), genDate, solveDate);
+  return new Puzzle(solution, table, generateID(), genDate, solveDate);
 }
 
 export async function getPuzzle(uuid = 0) {
