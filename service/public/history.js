@@ -1,6 +1,6 @@
 import { Puzzle } from "./modules/puzzle.js";
 
-let uuids = [];
+let puzzleIDs = [];
 
 function getValueAsString(row, col, puzzle) {
   const val = puzzle.getValueAt(row, col).toString();
@@ -48,8 +48,7 @@ function createMenuElement(puzzle, className) {
     // append continue button form
     const form = document.createElement("form");
     form.setAttribute("method", "get");
-    //TODO: change solve api form.setAttribute("action", `/solve/${puzzle.getUUID()}`)
-    form.setAttribute("action", "/solve");
+    form.setAttribute("action", `javascript:goToSolvePage(\"${puzzle.id}\")`);
 
     const button = document.createElement("button");
     button.setAttribute("type", "submit");
@@ -101,15 +100,18 @@ function createSolvedPuzzleElement(puzzle, puzzleIndex) {
 
 async function getMostRecentPuzzles() {
   const user = localStorage.getItem("username");
+  if (user === null) {
+    throw Error("LocalStorage is missing \"username\" item");
+  }
   let response = await fetch(`/api/puzzle/${user}/recent`);
-  uuids = await response.json();
+  puzzleIDs = await response.json();
 
   const puzzles = [];
-  for (let i = 0 ; i < uuids.length; i++) {
+  for (let i = 0 ; i < puzzleIDs.length; i++) {
     //get puzzle
-    response = await fetch(`/api/puzzle/${user}/${uuids[i]}`);
-    const {solution, table, uuid, genDate, solveDate } = await response.json();
-    puzzles[i] = new Puzzle(solution, table, uuid, genDate, solveDate);
+    response = await fetch(`/api/puzzle/${user}/${puzzleIDs[i]}`);
+    const {solution, table, id, genDate, solveDate } = await response.json();
+    puzzles[i] = new Puzzle(solution, table, id, genDate, solveDate);
   }
   //TODO: should it sort by date and if solved? or should api do that?
   return puzzles;
@@ -136,7 +138,7 @@ async function displayPuzzles() {
       }
 
       grid.appendChild(puzzleEl);
-      uuids.push(puzzles[i].getUUID());
+      puzzleIDs.push(puzzles[i].id);
     }
   } catch(error) {
     console.log(`An error occurred: ${error.message}`);
