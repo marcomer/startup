@@ -72,8 +72,10 @@ apiRouter.get("/puzzle/:user/:id/", async (req, res) => {
 apiRouter.post("/puzzle/:user/:id/", async (req, res) => {
   try {
     // parse puzzle from body
-    const puzzle = JSON.parse(req.body);
-    console.log(puzzle); //TODO: in future, save to database
+    const {solution, table, id, genDate, solveDate } = req.body;
+    // TODO: save puzzle to database
+
+    res.send();
   } catch (error) {
     return error; // is this right?
   }
