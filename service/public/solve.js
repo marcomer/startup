@@ -74,11 +74,17 @@ class Game {
   insertValue(row, col, value) {
     const [success, violations] = this.#puzzle.insertValueAt(row, col, value);
     if (success) {
-      // TODO: save the puzzle in the database
+      savePuzzle(this.#puzzle); // save puzzle to database
 
       if (this.#puzzle.solved()) {
         // puzzle has been solved
         this.resetDisplay();
+
+        // record the solve date
+        const solveDate = new Date();
+        this.#puzzle.setDateSolved(solveDate);
+
+        savePuzzle(this.#puzzle); // save solved puzzle in database
 
         // TODO: increase solved counter
         if (Database.getUserSolved() === null) {
@@ -103,8 +109,6 @@ class Game {
         this.displaySolvedAnimation();
 
 
-
-
         // TODO: create pop up, show when generated and when solved, continue to history page button
       }
       return true;
@@ -120,6 +124,7 @@ class Game {
 
   removeValueAt(row, col) {
     this.#puzzle.removeValueAt(row, col);
+    savePuzzle(this.#puzzle); // save puzzle in database
   }
 
 
@@ -139,15 +144,31 @@ class Game {
 
 }
 
-
-const isNum = new RegExp("[1-9]{1}");
-
 function parseRowAndCol(id) {
   const match = id.match(/\d/g);
   return [parseInt(match[0]), parseInt(match[1])];
 }
 
 
+async function savePuzzle(puzzle) {
+  console.log("Saving puzzle...");
+  const response = await fetch(`/api/puzzle/${user}/${puzzle.id}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    },
+    body: JSON.stringify(puzzle.basicObject()) // body data type must match "Content-Type" header
+  });
+  if (!response.ok) {
+    console.log("Failed to save the puzzle");
+    return;
+  }
+  console.log("Puzzle saved");
+}
+
+
+
+const isNum = new RegExp("[1-9]{1}"); //define isNum regular expression
 
 // start program
 
