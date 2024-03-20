@@ -1,4 +1,5 @@
 import { getPuzzle, generatePuzzle, generateSolvedPuzzle } from "./public/modules/puzzle.js";
+import { getScoreboard, getStats, setUserStats } from "./public/modules/db.js";
 import express from 'express';
 
 const app = express();
@@ -82,6 +83,32 @@ apiRouter.post("/puzzle/:user/:id/", async (req, res) => {
 });
 
 
+
+// get scoreboard
+apiRouter.get("/stats/scoreboard/", async (req, res) => {
+  const scores = await getScoreboard();
+  res.send(scores);
+});
+
+
+
+// get global and user stats
+apiRouter.get("/stats/:user/", async (req, res) => {
+  const stats = await getStats(req.params.user);
+  res.send(stats);
+});
+
+
+// update user and global stats
+apiRouter.post("/stats/:user/", async (req, res) => {
+  const result = await setUserStats(req.body);
+  if (result) {
+    res.send();
+  } else {
+    console.log("Error occurred");
+    res.send(); // TODO: change in future when database actually implemented
+  }
+});
 
 
 
