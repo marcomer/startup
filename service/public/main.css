@@ -278,8 +278,6 @@ footer > a {
   font-size: 30px;
 }
 
-
-
 .disabled-loading-screen {
   opacity: 0;
   transition: opacity 0.2s ease 0.2s;
