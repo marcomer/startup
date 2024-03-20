@@ -1,16 +1,18 @@
 # Startup Project
 BYU CS 260 Fall 2023 Startup Project for Marcus Omer
 
-## Website Links
+## Website/API Links
 + [superuserdoku.click](https://superuserdoku.click)
 + [startup.superuserdoku.click](https://startup.superuserdoku.click)
 + [simon.superuserdoku.click](https://simon.superuserdoku.click)
++ [Dosoku API](https://sudoku-api.vercel.app/) created by Raghav Gupta
 
 ## Table of Contents
 1. [Specification](#specification)
 2. [HTML Deliverable](#html-deliverable)
 3. [CSS Deliverable](#css-deliverable)
 4. [Javascript Deliverable](#javascript-deliverable)
+5. [Service Deliverable](#service-deliverable)
 
 ## Specification
 ### Pitch
@@ -62,3 +64,11 @@ Users can generate and revisit sudoku boards by logging in with an account. To m
 + **Support for future database** - A Database class was created that contains static functions. These functions retrieve user and global data. For now, the user and global data is stored in LocalStorage.
 + **Support for future WebSocket** - The `statistics.js` page repeatedly updates the global data variables to mimic WebSocket behavior.
 + **Support for application's interaction logic** - Most application interaction logic exists in `puzzle.js`, `solve.js`, and `history.js`. `puzzle.js` is responsible for defining, generating, and retrieving puzzles. `solve.js` displays and provides event listeners for the sudoku table that process input and trigger animations. `history.js` generates random puzzles when the page is loaded and lets the user go the solve page. In the future, `history.js` will load puzzles from the user's history instead of generating puzzles.
+
+
+## Service Deliverable
++ **Node.js and Express HTTP Service** - `index.js` implements an Express HTTP service which is ran by Node.js. The Express service serves up files and provides several service endpoints.
++ **Frontend served up using Express static middleware** - Any publicly available files are located in the `public/` directory. These files are served up using the Express static middleware. Different urls, such as `/history`, `/statistics`, and `/solve`, are mapped to different static middleware calls that provide the correct webpages.
++ **Third-party service endpoints** - A third-party service is used to generate puzzles. This is used in the `generatePuzzle()` function in the puzzle module. This third-party service is an open source sudoku API called [Dosoku](https://sudoku-api.vercel.app/), which was created by Raghav Gupta.
++ **Backend provides service endpoints** - The backend provides several service endpoints which are defined in `index.js`. Theses services are split into two categories: *puzzle* and *stats*. The puzzle service lets the frontend get, save, and generate puzzles. The stats service lets the frontend get and update global/user statistics. Since there is no database attached to the website yet, the statistics functionality is still primitive.
++ **Frontend calls your service endpoints** - The frontend calls the service endpoints provided by the backend. On the history page, the frontend uses the get puzzle and generate puzzle endpoints to display the user's history. The solve page also uses the puzzle service endpoints to retrieve and save puzzles. The statistics page uses the stats service to retrieve the global and user stats.
