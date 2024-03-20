@@ -1,5 +1,6 @@
 import {Puzzle, generatePuzzle, getPuzzle} from "./modules/puzzle.js";
 import {Database} from "./modules/db.js";
+import { loadingScreen } from "./modules/LoadingScreen.js"
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
@@ -180,27 +181,29 @@ if (user === null) {
 
 let puzzle = null;
 
-// get puzzleID
-const url = new URL(window.location.href);
-let puzzleID = url.searchParams.get("id");
-if (puzzleID === null) {
-  console.log("In get new puzzle");
-  const response = await fetch(`/api/puzzle/${user}/new`);
-  const {solution, table, id, genDate, solveDate } = await response.json();
-  console.log("Got new puzzle");
-  puzzle = new Puzzle(solution, table, id, genDate, solveDate);
-  puzzleID = id;
-  url.searchParams.append("id", puzzleID);
-  window.history.replaceState({}, "SuperUserDoku", url.href);
-}
+// trigger loading screen
+await loadingScreen(async () => {
+  // get puzzleID
+  const url = new URL(window.location.href);
+  let puzzleID = url.searchParams.get("id");
+  if (puzzleID === null) {
+    console.log("In get new puzzle");
+    const response = await fetch(`/api/puzzle/${user}/new`);
+    const {solution, table, id, genDate, solveDate } = await response.json();
+    console.log("Got new puzzle");
+    puzzle = new Puzzle(solution, table, id, genDate, solveDate);
+    puzzleID = id;
+    url.searchParams.append("id", puzzleID);
+    window.history.replaceState({}, "SuperUserDoku", url.href);
+  }
 
-// get puzzle
-if (puzzle === null) {
-  const response = await fetch(`/api/puzzle/${user}/${puzzleID}`);
-  const {solution, table, id, genDate, solveDate } = await response.json();
-  puzzle = new Puzzle(solution, table, id, genDate, solveDate);
-}
-
+  // get puzzle
+  if (puzzle === null) {
+    const response = await fetch(`/api/puzzle/${user}/${puzzleID}`);
+    const {solution, table, id, genDate, solveDate } = await response.json();
+    puzzle = new Puzzle(solution, table, id, genDate, solveDate);
+  }
+}, "Retrieving puzzle", 1000);
 
 // init game
 const game = new Game(puzzle);
