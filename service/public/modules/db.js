@@ -76,3 +76,61 @@ export class Database {
     return parseInt(r);
   }
 }
+
+
+
+
+let globalPuzzlesGenerated = Math.floor(Math.random() * 100 + 1000);
+let globalPuzzlesSolved = Math.floor(Math.random() * 100 + 500);
+let globalTotalPlayers = Math.floor(Math.random() * 100 + 500);
+
+
+let userPuzzlesGenerated = Math.floor(Math.random() * 100);
+let userPuzzlesSolved = userPuzzlesGenerated - Math.floor(Math.random() * userPuzzlesGenerated);
+let userScoreboardPosition = Math.floor(Math.random() * 9 + 1);
+
+
+
+
+export async function getScoreboard() {
+  let s = [];
+  for (let i = 0; i < 10; i++) {
+    s.push(Math.floor(Math.random() * 100));
+  }
+  s.sort((a,b) => b - a);
+
+  return {
+    scores: s
+  };
+}
+
+
+
+export async function getStats(user) {
+  // TODO: get user's stats from database
+  // currently there is only one set of user stats
+
+  return {
+    globalStats: {
+      puzzlesGenerated: globalPuzzlesGenerated,
+      puzzlesSolved: globalPuzzlesSolved,
+      totalPlayers: globalTotalPlayers
+    }, 
+    userStats: {
+      puzzlesGenerated: userPuzzlesGenerated,
+      puzzlesSolved: userPuzzlesSolved,
+      scoreboardPosition: userScoreboardPosition
+    }
+  };
+}
+
+
+export async function setUserStats(userStats) {
+  userPuzzlesGenerated = (userStats.puzzlesGenerated === null) ? userPuzzlesGenerated : userStats.puzzlesGenerated;
+  userPuzzlesSolved = (userStats.puzzlesSolved === null) ? userPuzzlesSolved : userStats.puzzlesSolved;
+  // scoreboardPosition cannot be set from here
+  // TODO: determine scoreboard position based on user's number of puzzles solved
+  // TODO: update scoreboard position
+
+  return true;
+}
