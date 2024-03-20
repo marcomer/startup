@@ -1,4 +1,5 @@
 import { Puzzle } from "./modules/puzzle.js";
+import { loadingScreen } from "./modules/LoadingScreen.js"
 
 let puzzleIDs = [];
 
@@ -145,4 +146,4 @@ async function displayPuzzles() {
   }
 }
 
-await displayPuzzles();
+await loadingScreen(displayPuzzles, "Retrieving history");
