@@ -10,7 +10,7 @@ function stepAnimation(description) {
   }
 }
 
-export async function loadingScreen(action, description) {
+export async function loadingScreen(action, description, delay = 0) {
   const text = document.getElementsByClassName("loading-screen")[0].children[0];
   text.innerHTML = description;
 
@@ -21,11 +21,16 @@ export async function loadingScreen(action, description) {
   await action();
 
   // clear loading screen
+  if (delay > 0) {
+    await sleep(delay);
+  }
+
+  // stop loading animation
+  clearInterval(animationInterval);
+  text.innerHTML = "";
+
   const loadingScreen = document.getElementsByClassName("loading-screen")[0];
   loadingScreen.classList.add("disabled-loading-screen");
 
-  // stop loading animation
-  sleep(1000);
-  clearInterval(animationInterval);
-  text.innerHTML = "";
+
 }
