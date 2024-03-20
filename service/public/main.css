@@ -250,3 +250,39 @@ footer > a {
     width: 325px;
   }
 }
+
+
+
+
+
+/* Loading screen rules */
+
+.loading-screen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+
+  background-color: #1a1a1a;
+
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-screen > p {
+  font-size: 30px;
+}
+
+
+
+.disabled-loading-screen {
+  opacity: 0;
+  transition: opacity 0.2s ease 0.2s;
+  pointer-events: none;
+}
+
