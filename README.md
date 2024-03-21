@@ -27,15 +27,15 @@ Users can generate and revisit sudoku boards by logging in with an account. To m
 ### Page Mocks
 **Puzzle Solving Page**:
 
-![](Sudoku_Solve_Page_Mock.png)
+![](images/Sudoku_Solve_Page_Mock.png)
 
 **History Page**:
 
-![](Sudoku_History_Page_Mock.png)
+![](images/Sudoku_History_Page_Mock.png)
 
 **Statistics Page**:
 
-![](Sudoku_Statistics_Page_Mock.png)
+![](images/Sudoku_Statistics_Page_Mock.png)
 
 
 
