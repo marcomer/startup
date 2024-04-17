@@ -1,0 +1,286 @@
+/* main.css defines the basic styles for all pages */
+
+* {
+  /* Lucida Console */
+  font-family: "Courier New", monospace;
+  color: white;
+}
+
+body {
+  position: relative;
+  margin: 0px 10%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #1a1a1a;
+  min-width: 375px;
+
+  padding-bottom: 5rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
+
+
+/* Header rules */
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+header > img {
+  display: flex;
+  width: calc(450px + 10%);
+  height: auto;
+  align-self: center;
+  padding: 30px;
+}
+
+header > div {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 70px;
+}
+
+
+/* Footer rules */
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  height: 5rem;
+  padding-top: 10px;
+}
+
+footer > span,
+footer > a {
+  color: #bbbbbb;
+}
+
+
+/* Nav menu rules */
+.menu-wrapper {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+}
+
+.checkbox-toggle {
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+}
+
+.hamburger {
+  position: absolute;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  background: rgb(255,176,0);
+  border-radius: 0.12em;
+  cursor: pointer;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger > div {
+  flex: none;
+  width: 20px;
+  height: 2px;
+  background: #0f0f0f;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  backface-visibility: hidden;
+  outline: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu > .menu-background {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: #1a1a1a;
+  transition: opacity 0.4s ease;
+  overflow-y: auto;
+  flex: none;
+  backface-visibility: hidden;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.2s;
+}
+
+.menu > .menu-background > ul {
+  list-style: none;
+  padding: 0 1em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 80px;
+  margin-top: 10px;
+}
+
+.menu > .menu-background > ul > li {
+  padding: 0;
+  margin: 10px;
+  font-size: 24px;
+}
+
+.menu > .menu-background > img {
+  width: calc(450px + 10%);
+  height: auto;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.menu-footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menu-footer > span,
+.menu-footer > a {
+  color: #bbbbbb;
+}
+
+
+/* Nav Menu checked animations */
+.checkbox-toggle:checked + .hamburger > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-2 {
+  opacity: 0;
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-1 {
+  transform: rotate(45deg);
+}
+
+.checkbox-toggle:checked + .hamburger > #hamburger-3 {
+  transform: rotate(-45deg);
+}
+
+.checkbox-toggle:checked ~ .menu {
+  pointer-events: auto;
+}
+
+.checkbox-toggle:checked ~ .menu > .menu-background {
+  opacity: 1;
+}
+
+/* https://codepen.io/brenden/pen/VLjKMQ?editors=1100 */
+
+
+@media (orientation: portrait) {
+  body {
+    margin: 0;
+    padding: 0 15px;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 475px) {
+  header > img {
+    width: 425px;
+  }
+
+  .menu > .menu-background > img {
+    width: 425px;
+  }
+}
+
+@media (max-width: 475px) {
+  header > img {
+    width: 325px;
+  }
+
+  .menu > .menu-background > img {
+    width: 325px;
+  }
+}
+
+
+
+
+
+/* Loading screen rules */
+
+.loading-screen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+
+  background-color: #1a1a1a;
+
+  pointer-events: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-screen > p {
+  font-size: 30px;
+}
+
+.disabled-loading-screen {
+  opacity: 0;
+  transition: opacity 0.2s ease 0.2s;
+  pointer-events: none;
+}
+
